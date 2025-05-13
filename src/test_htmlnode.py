@@ -1,6 +1,8 @@
+# HTMLNode tests copilot generated 'cause lazy. learn how to do tests later.
+
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_eq(self):
@@ -30,6 +32,19 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode(tag='div', value='Test')
         with self.assertRaises(NotImplementedError):
             node.to_html()
+
+    def test_leaf_to_html_p(self):
+        node = LeafNode('p', 'Hello, world!')
+        self.assertEqual(node.to_html(), '<p>Hello, world!</p>')
+
+    def test_leaf_to_html_no_value(self):
+        node = LeafNode('b')
+        with self.assertRaises(ValueError):
+            node.to_html()
+
+    def test_leaf_to_html_no_tag(self):
+        node = LeafNode(None, 'no tag')
+        self.assertEqual(node.to_html(), 'no tag')
 
 if __name__ == '__main__':
     unittest.main()

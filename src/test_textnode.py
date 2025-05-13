@@ -1,3 +1,5 @@
+# copilot generated 'cause lazy. learn how to do tests later.
+
 import unittest
 
 from textnode import TextNode, TextType
