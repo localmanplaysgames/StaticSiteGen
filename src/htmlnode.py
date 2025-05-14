@@ -1,6 +1,6 @@
 class HTMLNode:
 
-    def __init__(self, tag=None, value=None, props=None, children=None):
+    def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
         self.value = value
         self.children = children
@@ -26,3 +26,13 @@ class LeafNode(HTMLNode):
         if self.tag == None:
             return self.value
         return f'<{self.tag}>{self.value}</{self.tag}>'
+    
+class ParentNote(HTMLNode):
+
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag, children, props)
+
+    def to_html(self):
+        if self.tag == None:
+            raise ValueError
+        
