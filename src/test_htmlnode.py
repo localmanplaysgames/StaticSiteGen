@@ -1,7 +1,4 @@
-# HTMLNode tests copilot generated 'cause lazy. learn how to do tests later.
-
 import unittest
-
 from htmlnode import HTMLNode, LeafNode
 
 class TestHTMLNode(unittest.TestCase):
