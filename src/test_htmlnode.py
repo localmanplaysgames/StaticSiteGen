@@ -1,5 +1,5 @@
 import unittest
-from htmlnode import HTMLNode, LeafNode, ParentNode
+from htmlnode import *
 
 class TestHTMLNode(unittest.TestCase):
     def test_eq(self):
@@ -15,7 +15,6 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_props_to_html(self):
         node = HTMLNode(tag='a', value='Link', props={'href': 'http://example.com', 'target': '_blank'})
-        # The order of attributes in the string may vary, so check for both
         html = node.props_to_html()
         self.assertIn('href=http://example.com', html)
         self.assertIn('target=_blank', html)
