@@ -8,8 +8,8 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(node, node2)
 
     def test_not_eq_text(self):
-        node1 = TextNode('Text A', TextType.NORMAL)
-        node2 = TextNode('Text B', TextType.NORMAL)
+        node1 = TextNode('Text A', TextType.TEXT)
+        node2 = TextNode('Text B', TextType.TEXT)
         self.assertNotEqual(node1, node2)
 
     def test_not_eq_type(self):
@@ -28,8 +28,8 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(node1, node2)
 
     def test_repr(self):
-        node = TextNode('Hello', TextType.NORMAL)
-        self.assertEqual(repr(node), 'TextNode(Hello, normal, None)')
+        node = TextNode('Hello', TextType.TEXT)
+        self.assertEqual(repr(node), 'TextNode(Hello, text, None)')
 
     def test_accepts_str_texttype(self):
         node = TextNode('Hello', 'bold')
