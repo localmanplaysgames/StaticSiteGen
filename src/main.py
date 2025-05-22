@@ -18,7 +18,20 @@ def text_node_to_html_node(text_node):
         raise Exception('Not a valid text type.')
     
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    if text_type != TextType.TEXT:
+    new_nodes = []
+    for node in old_nodes:
+        if node.text_type != TextType.TEXT:
+            new_nodes.append(node)
+        else:
+            substrings = node.text.split(delimiter)
+            if len(substrings) % 2 == 0:
+                raise Exception('Invalid markdown text provided.')
+            for i in range (0, len(substrings)):
+                if i == 0 or i % 2 == 0:
+                    new_nodes.append(TextNode(substrings[i], TextType.TEXT))
+                else:
+                    new_nodes.append(TextNode(substrings[i], text_type))
+    return new_nodes
 
 def main():
     print(TextNode('This is some anchor text', 'link', 'https://www.boot.dev').__repr__)
