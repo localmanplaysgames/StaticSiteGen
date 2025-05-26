@@ -90,6 +90,15 @@ def split_nodes_link(old_nodes):
             new_nodes.append(node)
     return new_nodes
 
+def text_to_textnodes(text):
+    node = [TextNode(text, TextType.TEXT)]
+    node = split_nodes_delimiter(node, "**", TextType.BOLD)
+    node = split_nodes_delimiter(node, "_", TextType.ITALIC)
+    node = split_nodes_delimiter(node, "`", TextType.CODE)
+    node = split_nodes_image(node)
+    node = split_nodes_link(node)
+    return node
+
 def main():
     print(TextNode('This is some anchor text', 'link', 'https://www.boot.dev').__repr__)
 

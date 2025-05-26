@@ -175,7 +175,7 @@ class testMain(unittest.TestCase):
                          [TextType.TEXT, TextType.IMAGE, TextType.TEXT, TextType.IMAGE, TextType.TEXT])
         self.assertEqual(result[1].url, "1.png")
         self.assertEqual(result[3].url, "2.jpg")
-        
+
     def test_split_nodes_image_no_image(self):
         nodes = [TextNode("No images here.", TextType.TEXT)]
         result = split_nodes_image(nodes)
@@ -228,7 +228,23 @@ class testMain(unittest.TestCase):
         result = split_nodes_link(nodes)
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0].text, "")
-        self.assertEqual(result[0].text_type, TextType.TEXT)   
+        self.assertEqual(result[0].text_type, TextType.TEXT)
+
+    def test_text_to_textnodes_example(self):
+        text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        result = text_to_textnodes(text)
+        expected_result = [
+            TextNode("This is ", TextType.TEXT),
+            TextNode("text", TextType.BOLD),
+            TextNode(" with an ", TextType.TEXT),
+            TextNode("italic", TextType.ITALIC),
+            TextNode(" word and a ", TextType.TEXT),
+            TextNode("code block", TextType.CODE),
+            TextNode(" and an ", TextType.TEXT),
+            TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"),
+            TextNode(" and a ", TextType.TEXT),
+            TextNode("link", TextType.LINK, "https://boot.dev")]
+        self.assertEqual(result, expected_result)
 
 if __name__ == '__main__':
     unittest.main()
